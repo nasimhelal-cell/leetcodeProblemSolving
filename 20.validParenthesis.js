@@ -3,32 +3,24 @@
  * @return {boolean}
  */
 var isValid = function (s) {
-  let sArr = s.split("");
-  let fc = [...sArr],
-    sc = [...sArr],
-    tc = [...sArr];
+  let stack = [];
+  let map = {
+    "(": ")",
+    "{": "}",
+    "[": "]",
+  };
 
-  for (let i = 0; i < sArr.length; i++) {
-    if (sArr[i] === "(") {
-      fc = fc
-        .splice(i + 1)
-        .join("")
-        .includes(")");
-    }
-    if (sArr[i] === "{") {
-      sc = sc
-        .splice(i + 1)
-        .join("")
-        .includes("}");
-    }
-    if (sArr[i] === "[") {
-      tc = tc
-        .splice(i + 1)
-        .join("")
-        .includes("]");
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i];
+
+    if (map[char]) {
+      stack.push(char);
+    } else if (stack.length === 0 || map[stack.pop()] !== char) {
+      return false;
     }
   }
-  return fc && sc && tc ? true : false;
-};
-console.log(isValid("([)]"));
 
+  return stack.length === 0;
+};
+
+console.log(isValid("()[]"));

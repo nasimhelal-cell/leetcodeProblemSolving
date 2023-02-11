@@ -9,5 +9,5 @@ var containsDuplicate = function (nums) {
   }
   return ans;
 };
-//1,1,2,3
+
 console.log(containsDuplicate([1, 2, 3, 4]));
